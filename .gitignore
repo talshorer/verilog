@@ -1,0 +1,6 @@
+# Verilog output files
+*.vo
+
+# Editor backups and generated files
+*~
+*.gen.*
