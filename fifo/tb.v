@@ -14,9 +14,10 @@ reg[`DATA_WIDTH-1:0] tempdata;
 wire [`DATA_WIDTH-1:0] buf_out;
 wire [`ADDR_WIDTH-1:0] fifo_counter;
 
-fifo ff( .clk(clk), .rst(rst), .data_in(buf_in), .data_out(buf_out), 
+fifo #(.data_width(`DATA_WIDTH), .addr_width(`ADDR_WIDTH))
+	ff( .clk(clk), .rst(rst), .data_in(buf_in), .data_out(buf_out), 
          .wr_en(wr_en), .rd_en(rd_en), .empty(buf_empty), 
-         .full(buf_full), .cnt(fifo_counter) );
+         .full(buf_full), .cnt(fifo_counter));
 
 initial
 begin

@@ -1,20 +1,20 @@
-`define DATA_WIDTH 8
-`define ADDR_WIDTH 8
-`define BUF_SIZE (1 << `DATA_WIDTH)
-
 module fifo(clk, rst, data_in, data_out, wr_en, rd_en, empty, full, cnt);
 
+parameter data_width = 1;
+parameter addr_width = 1;
+`define BUF_SIZE (1 << addr_width)
+
 input clk, rst, wr_en, rd_en;
-input[`DATA_WIDTH-1:0] data_in;
-output[`DATA_WIDTH-1:0] data_out;
+input[data_width-1:0] data_in;
+output[data_width-1:0] data_out;
 output empty, full;
-output[`ADDR_WIDTH-1:0] cnt;
+output[addr_width-1:0] cnt;
 
-reg[`DATA_WIDTH-1:0] data_out;
-reg[`ADDR_WIDTH-1:0] cnt;
+reg[data_width-1:0] data_out;
+reg[addr_width-1:0] cnt;
 
-reg[`ADDR_WIDTH-1:0] rd_ptr, wr_ptr;
-reg[`DATA_WIDTH-1:0] buf_mem[`BUF_SIZE-1:0];
+reg[addr_width-1:0] rd_ptr, wr_ptr;
+reg[data_width-1:0] buf_mem[`BUF_SIZE-1:0];
 wire rd, wr;
 
 assign full = (cnt == (`BUF_SIZE-1));
